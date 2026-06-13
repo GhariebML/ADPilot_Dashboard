@@ -14,17 +14,40 @@ from dashboard.components.charts import price_distribution, ppsqm_box, location_
 
 st.set_page_config(page_title="Egypt Real Estate Intelligence", page_icon="🏙️", layout="wide")
 
-# Custom CSS styling
-st.markdown("""
+market=load_market_data(); meta=load_metadata(); prep=load_preparation_summary()
+
+def egp(v): return f"EGP {v:,.0f}"
+def insight(text): st.info(text)
+
+# Custom CSS styling including Sidebar overrides
+st.html("""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-    /* Global Styles */
+    /* Global Styles & Animations */
     .main .block-container {
         padding-top: 2rem !important;
         padding-bottom: 2rem !important;
         max-width: 1200px !important;
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Sidebar styling overrides */
+    [data-testid="stSidebar"] {
+        background-color: #080c14 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stMetric"] {
+        background: rgba(255, 255, 255, 0.02) !important;
+        margin-bottom: 12px !important;
+        padding: 10px 14px !important;
+        border: 1px solid rgba(255, 255, 255, 0.04) !important;
     }
     
     /* Headers styling */
@@ -154,15 +177,34 @@ st.markdown("""
         overflow: hidden !important;
     }
 </style>
-""", unsafe_allow_html=True)
+""")
+
+# Elegant Sidebar Layout
+with st.sidebar:
+    st.html("""
+    <div style="text-align: center; padding: 15px 0 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 25px;">
+        <span style="font-size: 2.8rem; filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.4));">🏙️</span>
+        <h2 style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.35rem; background: linear-gradient(135deg, #a5b4fc, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 8px 0 2px 0;">ADPilot Egypt</h2>
+        <div style="font-size: 0.7rem; color: #9ca3af; letter-spacing: 0.08em; text-transform: uppercase;">Real Estate Intelligence</div>
+    </div>
+    """)
+    
+    st.markdown("### Persistent Context")
+    st.metric("Total Listings", f"{len(market):,}")
+    st.metric("Median Price", egp(market.price_egp.median()))
+    st.metric("Median EGP/sqm", f"{market.price_per_sqm.median():,.0f}")
+    
+    st.html("""
+    <div style="margin-top: 35px; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); font-size: 0.72rem; color: #9ca3af; line-height: 1.45; font-family: 'Inter', sans-serif;">
+        <span style="color: #6366f1; font-weight: bold;">SYSTEM STATUS:</span> Online<br>
+        <span style="color: #6366f1; font-weight: bold;">ARCHIVE DATE:</span> March 2026<br>
+        <span style="color: #6366f1; font-weight: bold;">PREDICTIVE MODEL:</span> CatBoost v1.2<br>
+        <span style="color: #6366f1; font-weight: bold;">DATA SOURCE:</span> PropertyFinder EG
+    </div>
+    """)
 
 st.title("Egyptian Real Estate Market Intelligence")
 st.caption("Observed asking-price analytics and model estimates from PropertyFinder Egypt listings scraped in March 2026.")
-
-market=load_market_data(); meta=load_metadata(); prep=load_preparation_summary()
-
-def egp(v): return f"EGP {v:,.0f}"
-def insight(text): st.info(text)
 
 tabs=st.tabs([
     "Executive Overview",
@@ -277,6 +319,22 @@ with tabs[3]:
         summary=d.groupby("submarket_or_compound",observed=True).agg(listings=("listing_id","size"),median_price=("price_egp","median"),median_ppsqm=("price_per_sqm","median"),property_types=("property_type","nunique"),luxury_share=("market_tier",lambda s:(s=="Luxury").mean()),median_fair_price=("predicted_fair_price","median")).reset_index()
         st.dataframe(summary,width="stretch",hide_index=True)
         
+        # Compound Bubble Chart (New Feature)
+        fig_bubble = px.scatter(
+            summary,
+            x="listings",
+            y="median_price",
+            size="median_ppsqm",
+            color="submarket_or_compound",
+            hover_name="submarket_or_compound",
+            title="Compound Market Position (Bubble Size = Price per SQM)",
+            labels={"listings": "Number of Listings", "median_price": "Median Price (EGP)", "submarket_or_compound": "Compound"},
+            color_discrete_sequence=["#6366f1", "#14b8a6", "#8b5cf6", "#ec4899", "#f59e0b"]
+        )
+        fig_bubble.update_yaxes(tickformat=",")
+        apply_premium_style(fig_bubble)
+        st.plotly_chart(fig_bubble, width="stretch")
+        
         fig_box = px.box(
             d,
             x="submarket_or_compound",
@@ -321,7 +379,7 @@ with tabs[4]:
         conf,flags=confidence_label(row,meta,market)
         
         # Premium Glowing Card for Estimation Results
-        st.markdown(f"""
+        st.html(f"""
         <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(20, 184, 166, 0.12) 100%); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 16px; padding: 28px; margin-bottom: 24px; text-align: center; box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);">
             <div style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: #a5b4fc; margin-bottom: 8px;">Estimated Fair Price</div>
             <div style="font-size: 2.8rem; font-weight: 800; color: #ffffff; font-family: 'Outfit', sans-serif; text-shadow: 0 0 15px rgba(99, 102, 241, 0.4); margin-bottom: 8px;">{egp(pred["predicted"])}</div>
@@ -341,18 +399,114 @@ with tabs[4]:
                 </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """)
         
         if flags: st.warning("; ".join(flags))
         exp=local_explanation(row,meta).head(8)
+        
+        # Convert SHAP log values to percentage impact on total price
+        exp["pct_impact"] = (np.exp(exp["impact_log_price"]) - 1) * 100
+        
+        # Build beautiful visual presentation
+        contrib_rows = []
+        for idx, r in exp.iterrows():
+            val = r["pct_impact"]
+            color = "#14b8a6" if val < 0 else "#ec4899"
+            badge_bg = "rgba(20, 184, 166, 0.12)" if val < 0 else "rgba(236, 72, 153, 0.12)"
+            sign = "" if val < 0 else "+"
+            
+            friendly_names = {
+                "market_region": "Market Region",
+                "town": "Town",
+                "district": "District",
+                "submarket_or_compound": "Submarket/Compound",
+                "property_type": "Property Type",
+                "area_sqm": "Area (sqm)",
+                "bedrooms_num": "Bedrooms Count",
+                "bathrooms_num": "Bathrooms Count",
+                "furnished": "Furnishing Status",
+                "payment_method": "Payment Type",
+                "completion_status": "Completion Status",
+                "listing_level": "Listing Service Level",
+                "new_city_indicator": "New City Status",
+                "compound_status": "Compound Classification",
+                "listing_age_days": "Listing Age (days)",
+                "lat": "Latitude",
+                "lon": "Longitude",
+                "images_count": "Photos Count",
+                "amenities_count": "Amenities Count"
+            }
+            fname = friendly_names.get(r['feature'], r['feature'])
+            
+            contrib_rows.append(f"""
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: background 0.2s;">
+                <div>
+                    <div style="font-size: 0.9rem; font-weight: 600; color: #f3f4f6; font-family: 'Outfit', sans-serif;">{fname}</div>
+                    <div style="font-size: 0.75rem; color: #9ca3af; font-family: 'Inter', sans-serif;">Value: <span style="color: #cbd5e1; font-weight: 600;">{r['value']}</span></div>
+                </div>
+                <div style="background: {badge_bg}; color: {color}; font-size: 0.85rem; font-weight: 700; padding: 6px 12px; border-radius: 6px; border: 1px solid {color}25; font-family: 'Outfit', sans-serif;">
+                    {sign}{val:.1f}%
+                </div>
+            </div>
+            """)
+        
+        contrib_html = f"""
+        <div style="background: rgba(30, 41, 59, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; overflow: hidden; margin-top: 10px;">
+            {''.join(contrib_rows)}
+        </div>
+        """
+        
+        # Build beautiful listing cards
+        comps=comparable_listings(row,market,8)
+        comps_html = []
+        for idx, r in comps.iterrows():
+            sim_pct = r["similarity_score"] * 100
+            price_str = f"EGP {r['price_egp']:,.0f}"
+            ppsqm_str = f"{r['price_per_sqm']:,.0f} EGP/sqm"
+            
+            tier_color = "#6366f1" if r["market_tier"] == "Luxury" else "#14b8a6" if r["market_tier"] == "Upper-mid" else "#8b5cf6" if r["market_tier"] == "Mid-market" else "#9ca3af"
+            tier_badge = f"<span style='background: {tier_color}18; color: {tier_color}; border: 1px solid {tier_color}30; font-size: 0.65rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase;'>{r['market_tier']}</span>"
+            
+            spec_str = f"{int(r['bedrooms_num'])} Beds · {int(r['bathrooms_num'])} Baths · {int(r['area_sqm'])} sqm"
+            loc_str = f"{r['town']}, {r['district']}"
+            if r['submarket_or_compound'] != "Unknown":
+                loc_str += f" ({r['submarket_or_compound']})"
+            
+            comps_html.append(f"""
+            <div style="background: rgba(30, 41, 59, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px; margin-bottom: 12px; transition: transform 0.2s, border-color 0.2s;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 6px;">
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 700; color: #f3f4f6; max-width: 70%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{r['title']}">{r['title']}</div>
+                    {tier_badge}
+                </div>
+                <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #9ca3af; margin-bottom: 10px;">
+                    📍 {loc_str}<br>
+                    📏 {spec_str}
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 10px; margin-top: 8px;">
+                    <div>
+                        <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; color: #ffffff;">{price_str}</div>
+                        <div style="font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #9ca3af;">{ppsqm_str}</div>
+                    </div>
+                    <div style="width: 40%; text-align: right;">
+                        <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px; margin-bottom: 4px;">
+                            <span style="font-family: 'Outfit', sans-serif; font-size: 0.75rem; color: #a5b4fc; font-weight: 700;">{sim_pct:.0f}% match</span>
+                        </div>
+                        <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+                            <div style="width: {sim_pct:.0f}%; height: 100%; background: linear-gradient(90deg, #6366f1, #14b8a6); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            """)
+        comps_list_html = f"<div style='margin-top: 10px;'>{''.join(comps_html)}</div>"
+        
         a,b=st.columns(2)
         with a:
             st.subheader("Feature contribution to estimate")
-            st.dataframe(exp[["feature","value","direction","impact_log_price"]],hide_index=True,width="stretch")
+            st.html(contrib_html)
         with b:
             st.subheader("Comparable market listings")
-            comps=comparable_listings(row,market,8)
-            st.dataframe(comps.drop(columns=["detail_url"]),hide_index=True,width="stretch")
+            st.html(comps_list_html)
 
 with tabs[5]:
     st.subheader("How accurate and reliable is the model?")
@@ -428,4 +582,5 @@ with tabs[7]:
 **Limitations:** Asking prices are not completed transactions; developer identity is absent; geographic fields mix administrative and marketing labels; market conditions may change after March 2026.
 """)
     st.dataframe(pd.read_csv(ROOT/"reports"/"decision_log.csv"),width="stretch",hide_index=True)
+
 
