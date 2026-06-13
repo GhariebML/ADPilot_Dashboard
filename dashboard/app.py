@@ -282,7 +282,7 @@ with tabs[0]:
     insight(f"The market is broadly balanced across tiers. Median asking price is {fmt(market_raw.price_egp.median())}; luxury represents {tiers['Luxury']:.1%}. Model estimates are decision support, not appraisals.")
     
     a, b = st.columns(2)
-    a.plotly_chart(price_distribution(market, curr=selected_currency), width="stretch")
+    a.plotly_chart(price_distribution(market, curr=selected_currency), use_container_width=True)
     
     # Styled Tier Share
     fig_tiers = px.bar(
@@ -297,7 +297,7 @@ with tabs[0]:
     fig_tiers.update_layout(showlegend=False)
     fig_tiers.update_yaxes(tickformat=".0%")
     apply_premium_style(fig_tiers)
-    b.plotly_chart(fig_tiers, width="stretch")
+    b.plotly_chart(fig_tiers, use_container_width=True)
     
     st.caption(f"Model test MAE: {fmt(meta['test_metrics']['MAE_EGP'])} · R²: {meta['test_metrics']['R2']:.3f} · Typical median absolute error: {fmt(meta['test_metrics']['MedianAE_EGP'])}")
 
@@ -332,8 +332,8 @@ with tabs[1]:
     
     if len(filtered):
         a, b = st.columns(2)
-        a.plotly_chart(price_distribution(filtered, curr=selected_currency), width="stretch")
-        b.plotly_chart(ppsqm_box(filtered, curr=selected_currency), width="stretch")
+        a.plotly_chart(price_distribution(filtered, curr=selected_currency), use_container_width=True)
+        b.plotly_chart(ppsqm_box(filtered, curr=selected_currency), use_container_width=True)
         
         display_cols = {
             "title": "Title",
@@ -355,14 +355,14 @@ with tabs[1]:
                 f"Price ({selected_currency})": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
                 f"Price/sqm ({selected_currency})": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d")
             },
-            width="stretch",
+            use_container_width=True,
             hide_index=True
         )
 
 with tabs[2]:
     st.subheader("Which locations command the strongest price per sqm?")
     insight("Use locations with adequate sample sizes. Small markets may appear extreme because a few listings dominate their median.")
-    st.plotly_chart(location_bar(loc, curr=selected_currency), width="stretch")
+    st.plotly_chart(location_bar(loc, curr=selected_currency), use_container_width=True)
     
     heat = market.groupby(["town", "property_type"], observed=True).agg(median_ppsqm=("price_per_sqm", "median"), n=("listing_id", "size")).reset_index()
     top_towns = market.town.value_counts().head(20).index
@@ -378,7 +378,7 @@ with tabs[2]:
     )
     fig_heat.update_layout(coloraxis_colorbar=dict(title=f"{selected_currency}/SQM", tickformat=","))
     apply_premium_style(fig_heat)
-    st.plotly_chart(fig_heat, width="stretch")
+    st.plotly_chart(fig_heat, use_container_width=True)
     
     # Geographic Market Explorer Map
     st.markdown("---")
@@ -432,7 +432,7 @@ with tabs[2]:
             }
         )
         apply_premium_style(fig_map)
-        st.plotly_chart(fig_map, width="stretch")
+        st.plotly_chart(fig_map, use_container_width=True)
     else:
         st.info("No geocoded properties found for the selected location filters.")
         
@@ -448,7 +448,7 @@ with tabs[2]:
             "Median Area": st.column_config.NumberColumn(format="%d sqm"),
             "Listings": st.column_config.NumberColumn(format="%d")
         },
-        width="stretch",
+        use_container_width=True,
         hide_index=True
     )
 
@@ -482,7 +482,7 @@ with tabs[3]:
                 "Luxury Share": st.column_config.NumberColumn(format="%.1%"),
                 "Median Fair Price": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d")
             },
-            width="stretch",
+            use_container_width=True,
             hide_index=True
         )
         
@@ -500,7 +500,7 @@ with tabs[3]:
         )
         fig_bubble.update_yaxes(tickformat=",")
         apply_premium_style(fig_bubble)
-        st.plotly_chart(fig_bubble, width="stretch")
+        st.plotly_chart(fig_bubble, use_container_width=True)
         
         fig_box = px.box(
             d,
@@ -513,7 +513,7 @@ with tabs[3]:
             color_discrete_sequence=["#6366f1", "#14b8a6", "#8b5cf6", "#ec4899", "#f59e0b"]
         )
         apply_premium_style(fig_box)
-        st.plotly_chart(fig_box, width="stretch")
+        st.plotly_chart(fig_box, use_container_width=True)
         best = summary.sort_values("median_ppsqm", ascending=False).iloc[0]
         insight(f"{best.submarket_or_compound} has the highest median price per sqm among the selected entities, based on {int(best.listings)} listings. Compare sample size and property mix before acting.")
 
@@ -747,7 +747,7 @@ with tabs[4]:
             hoverinfo="text"
         ))
         apply_premium_style(fig_comp_map)
-        st.plotly_chart(fig_comp_map, width="stretch")
+        st.plotly_chart(fig_comp_map, use_container_width=True)
         
         # Valuation Exporter CSV
         st.markdown("---")
@@ -814,7 +814,7 @@ with tabs[5]:
             "Training seconds": st.column_config.NumberColumn(format="%.3f s"),
             "Prediction seconds": st.column_config.NumberColumn(format="%.4f s")
         },
-        width="stretch",
+        use_container_width=True,
         hide_index=True
     )
     
@@ -827,7 +827,7 @@ with tabs[5]:
         test["predicted_fair_price"] = test["predicted_fair_price"] / 48.0
         
     a, b = st.columns(2)
-    a.plotly_chart(actual_predicted(test, curr=selected_currency), width="stretch")
+    a.plotly_chart(actual_predicted(test, curr=selected_currency), use_container_width=True)
     
     fig_err = px.histogram(
         test,
@@ -840,7 +840,7 @@ with tabs[5]:
     )
     fig_err.update_traces(marker_line_color="#090d16", marker_line_width=0.5, opacity=0.85)
     apply_premium_style(fig_err)
-    b.plotly_chart(fig_err, width="stretch")
+    b.plotly_chart(fig_err, use_container_width=True)
     
     fi = load_table("shap_global_importance.csv").head(15).sort_values("mean_abs_shap_log_price")
     fig_fi = px.bar(
@@ -855,7 +855,7 @@ with tabs[5]:
     )
     fig_fi.update_layout(coloraxis_showscale=False)
     apply_premium_style(fig_fi)
-    st.plotly_chart(fig_fi, width="stretch")
+    st.plotly_chart(fig_fi, use_container_width=True)
     
     st.caption("SHAP describes predictive association, not causation.")
     c = st.columns(4)
@@ -888,7 +888,7 @@ with tabs[5]:
         labels={"color": "Correlation Coefficient"}
     )
     apply_premium_style(fig_corr)
-    st.plotly_chart(fig_corr, width="stretch")
+    st.plotly_chart(fig_corr, use_container_width=True)
 
 with tabs[6]:
     st.subheader("Which listings differ materially from the model-estimated range?")
@@ -928,7 +928,7 @@ with tabs[6]:
             "Difference %": st.column_config.NumberColumn(format="%.1f%%"),
             "Opportunity Magnitude": st.column_config.NumberColumn(format="%.2f")
         },
-        width="stretch",
+        use_container_width=True,
         hide_index=True
     )
     st.download_button("Download filtered opportunities", d.to_csv(index=False).encode("utf-8"), "pricing_opportunities.csv", "text/csv")
@@ -960,4 +960,4 @@ with tabs[7]:
     st.markdown("Formal decision log documenting architectural selections, data pipeline steps, and reasoning.")
     decision_log = pd.read_csv(ROOT / "reports" / "decision_log.csv")
     decision_log.columns = [c.replace("_", " ").title() for c in decision_log.columns]
-    st.dataframe(decision_log, width="stretch", hide_index=True)
+    st.dataframe(decision_log, use_container_width=True, hide_index=True)
