@@ -1,0 +1,17 @@
+{
+  "source_rows_after_d007": 38774,
+  "final_analytical_rows": 18053,
+  "excluded_rows_total": 20721,
+  "recovered_area_rows": 1204,
+  "selected_property_types": [
+    "Apartment",
+    "Villa",
+    "Townhouse",
+    "Duplex",
+    "Chalet",
+    "Twin House"
+  ],
+  "price_target": "log_price",
+  "price_tier_method": "0.60 global price/sqm percentile + 0.40 within town/property-type percentile",
+  "developer_analysis_status": "Unavailable: no explicit developer field in source data"
+}

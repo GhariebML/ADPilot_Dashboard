@@ -1,0 +1,8 @@
+{
+  "method": "hybrid_percentile",
+  "global_price_per_sqm_weight": 0.60,
+  "town_property_type_percentile_weight": 0.40,
+  "minimum_segment_size": 30,
+  "fallback_segment": ["market_region", "property_type"],
+  "thresholds": {"Affordable": 0.25, "Mid-market": 0.50, "Upper-mid": 0.75, "Luxury": 1.0}
+}

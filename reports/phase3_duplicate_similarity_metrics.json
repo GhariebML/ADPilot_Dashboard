@@ -1,0 +1,41 @@
+{
+  "analytical_shape": [
+    39712,
+    53
+  ],
+  "broad_candidate_groups": 1597,
+  "broad_rows_involved": 3918,
+  "broad_extra_rows": 2321,
+  "rules": {
+    "exact_text": {
+      "components": 642,
+      "rows_involved": 1580,
+      "extra_rows": 938,
+      "extra_percent_of_analytical_data": 2.362
+    },
+    "strong_similarity": {
+      "components": 929,
+      "rows_involved": 2249,
+      "extra_rows": 1320,
+      "extra_percent_of_analytical_data": 3.324
+    },
+    "balanced_similarity": {
+      "components": 1036,
+      "rows_involved": 2505,
+      "extra_rows": 1469,
+      "extra_percent_of_analytical_data": 3.699
+    }
+  },
+  "blocking_fields": [
+    "category",
+    "property_type",
+    "location_full",
+    "bedrooms",
+    "bathrooms",
+    "area_value",
+    "price_egp",
+    "agent_id",
+    "furnished",
+    "payment_method"
+  ]
+}

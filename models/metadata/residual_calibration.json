@@ -1,0 +1,6 @@
+{
+  "lower_log_residual_q05": -0.6584639727146803,
+  "upper_log_residual_q95": 0.9582935119698736,
+  "median_abs_percentage_error": 0.3115763605375276,
+  "validation_rows": 2462
+}

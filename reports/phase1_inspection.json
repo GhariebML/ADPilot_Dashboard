@@ -1,0 +1,1271 @@
+{
+  "file": "/mnt/data/adpilot_real_estate_intelligence/data/raw/propertyfinder.csv",
+  "encoding": "UTF-8 with BOM (utf-8-sig)",
+  "delimiter": ",",
+  "rows": 39713,
+  "columns": 53,
+  "header": [
+    "listing_id",
+    "internal_id",
+    "category",
+    "listing_type",
+    "detail_url",
+    "property_type",
+    "offering_type",
+    "completion_status",
+    "title",
+    "price_egp",
+    "price_period",
+    "price_currency",
+    "location_full",
+    "city",
+    "town",
+    "district",
+    "subdistrict",
+    "lat",
+    "lon",
+    "bedrooms",
+    "bathrooms",
+    "area_value",
+    "area_unit",
+    "furnished",
+    "listing_level",
+    "is_premium",
+    "is_verified",
+    "is_featured",
+    "is_new_construction",
+    "is_direct_from_dev",
+    "is_exclusive",
+    "listed_date",
+    "images_count",
+    "has_view_360",
+    "video_url",
+    "reference",
+    "rera",
+    "description",
+    "amenities",
+    "payment_method",
+    "agent_id",
+    "agent_name",
+    "agent_email",
+    "agent_is_super",
+    "agent_languages",
+    "broker_id",
+    "broker_name",
+    "broker_email",
+    "broker_phone",
+    "contact_phone",
+    "contact_whatsapp",
+    "contact_email",
+    "scraped_at"
+  ],
+  "malformed_row_count": 0,
+  "malformed_examples": [],
+  "profile": [
+    {
+      "position": 1,
+      "column": "listing_id",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 39712,
+      "max_length": 26,
+      "examples": [
+        "F7QB31CGWE509V2W7DF2GARB2C",
+        "K1JC3D6N57ED52N3VX1QQKHHXG",
+        "Q6GEB8T6PZTJGNNPWA5PX3JCWR"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 2,
+      "column": "internal_id",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 39712,
+      "max_length": 10,
+      "examples": [
+        "56009081.0",
+        "56247925.0",
+        "56253883.0"
+      ],
+      "type_counts": {
+        "float": 33526,
+        "missing": 1,
+        "integer": 6186
+      }
+    },
+    {
+      "position": 3,
+      "column": "category",
+      "inferred_type": "string",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "max_length": 4,
+      "examples": [
+        "buy",
+        "rent"
+      ],
+      "type_counts": {
+        "string": 39713
+      }
+    },
+    {
+      "position": 4,
+      "column": "listing_type",
+      "inferred_type": "string",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "max_length": 22,
+      "examples": [
+        "property",
+        "project_recommendation"
+      ],
+      "type_counts": {
+        "string": 39713
+      }
+    },
+    {
+      "position": 5,
+      "column": "detail_url",
+      "inferred_type": "url",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 39712,
+      "max_length": 179,
+      "examples": [
+        "https://www.propertyfinder.eg/en/plp/buy/duplex-for-sale-cairo-new-cairo-city-the-5th-settlement-5th-settlement-compounds-the-lakeview-boutique-villas-2PsRH7FgVjU.html",
+        "https://www.propertyfinder.eg/en/plp/buy/apartment-for-sale-giza-sheikh-zayed-city-sheikh-zayed-compounds-village-west-2PtYXB31sjw.html",
+        "https://www.propertyfinder.eg/en/plp/buy/apartment-for-sale-cairo-new-cairo-city-the-5th-settlement-5th-settlement-compounds-palm-hills-new-cairo-2PtjsM8Jjft.html"
+      ],
+      "type_counts": {
+        "url": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 6,
+      "column": "property_type",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 19,
+      "max_length": 15,
+      "examples": [
+        "Duplex",
+        "Apartment",
+        "Villa"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 7,
+      "column": "offering_type",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 2,
+      "max_length": 20,
+      "examples": [
+        "Residential for Sale",
+        "Residential for Rent"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 8,
+      "column": "completion_status",
+      "inferred_type": "string",
+      "missing_count": 19950,
+      "missing_pct": 50.235,
+      "unique_count": 4,
+      "max_length": 17,
+      "examples": [
+        "completed",
+        "off_plan",
+        "completed_primary"
+      ],
+      "type_counts": {
+        "string": 19763,
+        "missing": 19950
+      }
+    },
+    {
+      "position": 9,
+      "column": "title",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 32700,
+      "max_length": 83,
+      "examples": [
+        "Garden Villa - Lake View Boutique - Prime Location",
+        "For Sale: Finished Apartment+ ACs in Village West",
+        "UnderMarket Price for Apt. 250 RTM PrimeLocation"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 10,
+      "column": "price_egp",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 4957,
+      "max_length": 12,
+      "examples": [
+        "24500000.0",
+        "5145000.0",
+        "10800000.0"
+      ],
+      "type_counts": {
+        "float": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 11,
+      "column": "price_period",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 2,
+      "max_length": 7,
+      "examples": [
+        "sell",
+        "monthly"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 12,
+      "column": "price_currency",
+      "inferred_type": "string",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "max_length": 3,
+      "examples": [
+        "EGP"
+      ],
+      "type_counts": {
+        "string": 39713
+      }
+    },
+    {
+      "position": 13,
+      "column": "location_full",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 1959,
+      "max_length": 105,
+      "examples": [
+        "The Lakeview Boutique Villas, 5th Settlement Compounds, The 5th Settlement, New Cairo City, Cairo",
+        "Village West, Sheikh Zayed Compounds, Sheikh Zayed City, Giza",
+        "Palm Hills New Cairo, 5th Settlement Compounds, The 5th Settlement, New Cairo City, Cairo"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 14,
+      "column": "city",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 12,
+      "max_length": 12,
+      "examples": [
+        "Cairo",
+        "Giza",
+        "North Coast"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 15,
+      "column": "town",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 67,
+      "max_length": 28,
+      "examples": [
+        "New Cairo City",
+        "Sheikh Zayed City",
+        "Sidi Abdel Rahman"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 16,
+      "column": "district",
+      "inferred_type": "string",
+      "missing_count": 347,
+      "missing_pct": 0.874,
+      "unique_count": 519,
+      "max_length": 54,
+      "examples": [
+        "The 5th Settlement",
+        "Sheikh Zayed Compounds",
+        "12th District"
+      ],
+      "type_counts": {
+        "string": 39366,
+        "missing": 347
+      }
+    },
+    {
+      "position": 17,
+      "column": "subdistrict",
+      "inferred_type": "string",
+      "missing_count": 6759,
+      "missing_pct": 17.02,
+      "unique_count": 1134,
+      "max_length": 49,
+      "examples": [
+        "5th Settlement Compounds",
+        "Village West",
+        "The Address"
+      ],
+      "type_counts": {
+        "string": 32951,
+        "missing": 6759,
+        "integer": 2,
+        "boolean": 1
+      }
+    },
+    {
+      "position": 18,
+      "column": "lat",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 1921,
+      "max_length": 18,
+      "examples": [
+        "30.04060173034668",
+        "30.048093795776367",
+        "30.01227188110352"
+      ],
+      "type_counts": {
+        "float": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 19,
+      "column": "lon",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 1941,
+      "max_length": 18,
+      "examples": [
+        "31.525941848754883",
+        "31.02005386352539",
+        "31.57951545715332"
+      ],
+      "type_counts": {
+        "float": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 20,
+      "column": "bedrooms",
+      "inferred_type": "string",
+      "missing_count": 35,
+      "missing_pct": 0.088,
+      "unique_count": 9,
+      "max_length": 6,
+      "examples": [
+        "3",
+        "2",
+        "4"
+      ],
+      "type_counts": {
+        "integer": 38369,
+        "missing": 35,
+        "string": 1309
+      }
+    },
+    {
+      "position": 21,
+      "column": "bathrooms",
+      "inferred_type": "string",
+      "missing_count": 38,
+      "missing_pct": 0.096,
+      "unique_count": 8,
+      "max_length": 2,
+      "examples": [
+        "6",
+        "2",
+        "4"
+      ],
+      "type_counts": {
+        "integer": 39415,
+        "missing": 38,
+        "string": 260
+      }
+    },
+    {
+      "position": 22,
+      "column": "area_value",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 734,
+      "max_length": 7,
+      "examples": [
+        "445.0",
+        "123.0",
+        "250.0"
+      ],
+      "type_counts": {
+        "float": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 23,
+      "column": "area_unit",
+      "inferred_type": "string",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "max_length": 3,
+      "examples": [
+        "sqm"
+      ],
+      "type_counts": {
+        "string": 39713
+      }
+    },
+    {
+      "position": 24,
+      "column": "furnished",
+      "inferred_type": "string",
+      "missing_count": 8385,
+      "missing_pct": 21.114,
+      "unique_count": 3,
+      "max_length": 6,
+      "examples": [
+        "PARTLY",
+        "YES",
+        "NO"
+      ],
+      "type_counts": {
+        "missing": 8385,
+        "string": 7576,
+        "boolean": 23752
+      }
+    },
+    {
+      "position": 25,
+      "column": "listing_level",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 3,
+      "max_length": 8,
+      "examples": [
+        "premium",
+        "featured",
+        "standard"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 26,
+      "column": "is_premium",
+      "inferred_type": "boolean",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "max_length": 5,
+      "examples": [
+        "True",
+        "False"
+      ],
+      "type_counts": {
+        "boolean": 39713
+      }
+    },
+    {
+      "position": 27,
+      "column": "is_verified",
+      "inferred_type": "boolean",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "max_length": 5,
+      "examples": [
+        "False"
+      ],
+      "type_counts": {
+        "boolean": 39713
+      }
+    },
+    {
+      "position": 28,
+      "column": "is_featured",
+      "inferred_type": "boolean",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "max_length": 5,
+      "examples": [
+        "False",
+        "True"
+      ],
+      "type_counts": {
+        "boolean": 39713
+      }
+    },
+    {
+      "position": 29,
+      "column": "is_new_construction",
+      "inferred_type": "boolean",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "max_length": 5,
+      "examples": [
+        "False"
+      ],
+      "type_counts": {
+        "boolean": 39713
+      }
+    },
+    {
+      "position": 30,
+      "column": "is_direct_from_dev",
+      "inferred_type": "boolean",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "max_length": 5,
+      "examples": [
+        "False"
+      ],
+      "type_counts": {
+        "boolean": 39713
+      }
+    },
+    {
+      "position": 31,
+      "column": "is_exclusive",
+      "inferred_type": "boolean",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "max_length": 5,
+      "examples": [
+        "False"
+      ],
+      "type_counts": {
+        "boolean": 39713
+      }
+    },
+    {
+      "position": 32,
+      "column": "listed_date",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 36255,
+      "max_length": 20,
+      "examples": [
+        "2026-03-03T19:15:06Z",
+        "2026-03-04T11:24:23Z",
+        "2026-03-04T14:03:51Z"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 33,
+      "column": "images_count",
+      "inferred_type": "integer",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 31,
+      "max_length": 2,
+      "examples": [
+        "6",
+        "10",
+        "13"
+      ],
+      "type_counts": {
+        "integer": 39713
+      }
+    },
+    {
+      "position": 34,
+      "column": "has_view_360",
+      "inferred_type": "boolean",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "max_length": 5,
+      "examples": [
+        "False",
+        "True"
+      ],
+      "type_counts": {
+        "boolean": 39713
+      }
+    },
+    {
+      "position": 35,
+      "column": "video_url",
+      "inferred_type": "string",
+      "missing_count": 39511,
+      "missing_pct": 99.491,
+      "unique_count": 154,
+      "max_length": 49,
+      "examples": [
+        "https://youtu.be/WIOiUBBn7Mg?si=hUaZo-XkXrkRMt2q",
+        "https://youtu.be/GTt0ER9xiVc?si=2j4uBTdo1Jn1vvsL",
+        "https://youtu.be/3dR0kAP7Tak?si=hg-1YULqPNSA2szT"
+      ],
+      "type_counts": {
+        "missing": 39511,
+        "url": 200,
+        "string": 2
+      }
+    },
+    {
+      "position": 36,
+      "column": "reference",
+      "inferred_type": "string",
+      "missing_count": 2,
+      "missing_pct": 0.005,
+      "unique_count": 39644,
+      "max_length": 50,
+      "examples": [
+        "F7QB31CGWE509V2W7DF2GARB2C",
+        "rb304",
+        "250pncash"
+      ],
+      "type_counts": {
+        "string": 38656,
+        "missing": 2,
+        "integer": 1037,
+        "float": 18
+      }
+    },
+    {
+      "position": 37,
+      "column": "rera",
+      "inferred_type": "string",
+      "missing_count": 39713,
+      "missing_pct": 100.0,
+      "unique_count": 0,
+      "max_length": 0,
+      "examples": [],
+      "type_counts": {
+        "missing": 39713
+      }
+    },
+    {
+      "position": 38,
+      "column": "description",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 35312,
+      "max_length": 2000,
+      "examples": [
+        "Garden Villa for Sale – Featured in Lake View Boutique – Fifth Settlement Prime Location Direct View ------------------------------------------------ Garden Villa Area: 445 sqm Garden Area: 130 sqm 3 Master Bedrooms Living Room 4 Bathrooms Nanny Room with Private Bathroom Drive Room with Private Bathroom Features: Parking Practical Design and Excellent Spaces Asking Price: EGP 24,500,000 ==================================== Lake View Boutique Project Features Elegant architectural design with a boutique style, providing high privacy and low population density Extensive green spaces and integrated landscaping create a sense of tranquility and comfort Artificial lakes and water features add a distinctive aesthetic to the project Various swimming pools suitable for all ages Complete health club including gym and spa Designated walking and jogging areas amidst open spaces Safe and recreational areas for children Security and guard services 24-hour security with advanced surveillance systems Underground parking to reduce congestion and maintain aesthetic appeal An integrated residential community combining privacy, luxury, and a high quality of life",
+        "For Sale: Finished Apartment with ACs in Village West Compound Area: 123 m 2 Bedrooms 2 Bathrooms Reception Terrace Landscape View Prime Location near all main roads 24-hour Security Clubhouse Jogging and Cycling Tracks Barbecue Area Kids Area ______________________ Price: 7,000,000 D.P: 5.145.000 Installments: 1.855.000 ______________________ For more details: 01007169666 Rana Amer",
+        "Palm Hills New Cairo Apartment BUA: 250sqm 4 Bedrooms + Living + Nanny 4 Bathrooms Ready to move Core and shell Downpayment: 10,800,000 Remainings: 1,150,000 Buyer Commission: 1.5% --------------------------------------------------------------------------------------------------------------------------------"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 39,
+      "column": "amenities",
+      "inferred_type": "string",
+      "missing_count": 33,
+      "missing_pct": 0.083,
+      "unique_count": 17995,
+      "max_length": 275,
+      "examples": [
+        "Balcony | Built in Wardrobes | Covered Parking | Maids Room | Private Garden | Private Pool | Shared Pool | Study | View of Water | Security | View of Landmark | Walk-in Closet | Shared Gym | Shared Spa | Children's Pool | Lobby in Building",
+        "Balcony | Built in Wardrobes | Central A/C | Covered Parking | Shared Pool | Security | Shared Spa | Shared Gym | View of Landmark | Lobby in Building | Children's Pool",
+        "Balcony | Built in Wardrobes | Central A/C | Covered Parking | Kitchen Appliances | Maids Room | Private Garden | Private Pool | Shared Pool | Study | View of Water | Security | Shared Spa | Shared Gym | Walk-in Closet | View of Landmark | Lobby in Building | Children's Pool"
+      ],
+      "type_counts": {
+        "string": 39680,
+        "missing": 33
+      }
+    },
+    {
+      "position": 40,
+      "column": "payment_method",
+      "inferred_type": "string",
+      "missing_count": 19774,
+      "missing_pct": 49.792,
+      "unique_count": 3,
+      "max_length": 19,
+      "examples": [
+        "cash",
+        "cash | installments",
+        "installments"
+      ],
+      "type_counts": {
+        "string": 19939,
+        "missing": 19774
+      }
+    },
+    {
+      "position": 41,
+      "column": "agent_id",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 3400,
+      "max_length": 7,
+      "examples": [
+        "58866.0",
+        "67166.0",
+        "47158.0"
+      ],
+      "type_counts": {
+        "float": 33526,
+        "missing": 1,
+        "integer": 6186
+      }
+    },
+    {
+      "position": 42,
+      "column": "agent_name",
+      "inferred_type": "string",
+      "missing_count": 8,
+      "missing_pct": 0.02,
+      "unique_count": 2652,
+      "max_length": 67,
+      "examples": [
+        "pierre osama",
+        "Rana Bahaa ElDeen",
+        "Ashraf Shaaban"
+      ],
+      "type_counts": {
+        "string": 39705,
+        "missing": 8
+      }
+    },
+    {
+      "position": 43,
+      "column": "agent_email",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 2732,
+      "max_length": 49,
+      "examples": [
+        "pierre.Osama@spade-consultancy.com",
+        "ranoushamer901@gmail.com",
+        "ashrafsobhy99@hotmail.com"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 44,
+      "column": "agent_is_super",
+      "inferred_type": "boolean",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "max_length": 5,
+      "examples": [
+        "False"
+      ],
+      "type_counts": {
+        "boolean": 39713
+      }
+    },
+    {
+      "position": 45,
+      "column": "agent_languages",
+      "inferred_type": "string",
+      "missing_count": 30541,
+      "missing_pct": 76.904,
+      "unique_count": 30,
+      "max_length": 95,
+      "examples": [
+        "English | Arabic",
+        "English | Arabic | Turkish",
+        "Arabic"
+      ],
+      "type_counts": {
+        "missing": 30541,
+        "string": 9172
+      }
+    },
+    {
+      "position": 46,
+      "column": "broker_id",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 1074,
+      "max_length": 8,
+      "examples": [
+        "5758.0",
+        "492.0",
+        "5279.0"
+      ],
+      "type_counts": {
+        "float": 33526,
+        "missing": 1,
+        "integer": 6186
+      }
+    },
+    {
+      "position": 47,
+      "column": "broker_name",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 776,
+      "max_length": 50,
+      "examples": [
+        "Spade consultancy",
+        "Abrag Real Estate",
+        "Premises"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 48,
+      "column": "broker_email",
+      "inferred_type": "string",
+      "missing_count": 203,
+      "missing_pct": 0.511,
+      "unique_count": 770,
+      "max_length": 40,
+      "examples": [
+        "mohmedg.sedik@gmail.com",
+        "snawara71@gmail.com",
+        "mahmouddessam@hotmail.com"
+      ],
+      "type_counts": {
+        "string": 39510,
+        "missing": 203
+      }
+    },
+    {
+      "position": 49,
+      "column": "broker_phone",
+      "inferred_type": "float",
+      "missing_count": 203,
+      "missing_pct": 0.511,
+      "unique_count": 1063,
+      "max_length": 14,
+      "examples": [
+        "1001436511.0",
+        "201001188088.0",
+        "201005133389.0"
+      ],
+      "type_counts": {
+        "float": 33365,
+        "missing": 203,
+        "integer": 6145
+      }
+    },
+    {
+      "position": 50,
+      "column": "contact_phone",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 3061,
+      "max_length": 20,
+      "examples": [
+        "201201801443.0",
+        "201007169666.0",
+        "201090963241.0"
+      ],
+      "type_counts": {
+        "float": 33526,
+        "missing": 1,
+        "integer": 6186
+      }
+    },
+    {
+      "position": 51,
+      "column": "contact_whatsapp",
+      "inferred_type": "float",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 540,
+      "max_length": 14,
+      "examples": [
+        "20221257340.0",
+        "201018976709.0",
+        "201200100885.0"
+      ],
+      "type_counts": {
+        "float": 33526,
+        "missing": 1,
+        "integer": 6186
+      }
+    },
+    {
+      "position": 52,
+      "column": "contact_email",
+      "inferred_type": "string",
+      "missing_count": 1,
+      "missing_pct": 0.003,
+      "unique_count": 2732,
+      "max_length": 49,
+      "examples": [
+        "pierre.Osama@spade-consultancy.com",
+        "ranoushamer901@gmail.com",
+        "ashrafsobhy99@hotmail.com"
+      ],
+      "type_counts": {
+        "string": 39712,
+        "missing": 1
+      }
+    },
+    {
+      "position": 53,
+      "column": "scraped_at",
+      "inferred_type": "string",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 4736,
+      "max_length": 26,
+      "examples": [
+        "2026-03-04T14:20:33.281007",
+        "2026-03-04T14:20:33.282527",
+        "2026-03-04T14:20:33.282719"
+      ],
+      "type_counts": {
+        "string": 39713
+      }
+    }
+  ],
+  "sample_records": [
+    {
+      "listing_id": "F7QB31CGWE509V2W7DF2GARB2C",
+      "internal_id": "56009081.0",
+      "category": "buy",
+      "listing_type": "property",
+      "detail_url": "https://www.propertyfinder.eg/en/plp/buy/duplex-for-sale-cairo-new-cairo-city-the-5th-settlement-5th-settlement-compounds-the-lakeview-boutique-villas-2PsRH7FgVjU.html",
+      "property_type": "Duplex",
+      "offering_type": "Residential for Sale",
+      "completion_status": "completed",
+      "title": "Garden Villa - Lake View Boutique - Prime Location",
+      "price_egp": "24500000.0",
+      "price_period": "sell",
+      "price_currency": "EGP",
+      "location_full": "The Lakeview Boutique Villas, 5th Settlement Compounds, The 5th Settlement, New Cairo City, Cairo",
+      "city": "Cairo",
+      "town": "New Cairo City",
+      "district": "The 5th Settlement",
+      "subdistrict": "5th Settlement Compounds",
+      "lat": "30.04060173034668",
+      "lon": "31.525941848754883",
+      "bedrooms": "3",
+      "bathrooms": "6",
+      "area_value": "445.0",
+      "area_unit": "sqm",
+      "furnished": "",
+      "listing_level": "premium",
+      "is_premium": "True",
+      "is_verified": "False",
+      "is_featured": "False",
+      "is_new_construction": "False",
+      "is_direct_from_dev": "False",
+      "is_exclusive": "False",
+      "listed_date": "2026-03-03T19:15:06Z",
+      "images_count": "6",
+      "has_view_360": "False",
+      "video_url": "",
+      "reference": "F7QB31CGWE509V2W7DF2GARB2C",
+      "rera": "",
+      "description": "Garden Villa for Sale – Featured in Lake View Boutique – Fifth Settlement Prime Location Direct View ------------------------------------------------ Garden Villa Area: 445 sqm Garden Area: 130 sqm 3 Master Bedrooms Living Room 4 Bathrooms Nanny Room with Private Bathroom Drive Room with Private Bathroom Features: Parking Practical Design and Excellent Spaces Asking Price: EGP 24,500,000 ==================================== Lake View Boutique Project Features Elegant architectural design with a boutique style, providing high privacy and low population density Extensive green spaces and integrated landscaping create a sense of tranquility and comfort Artificial lakes and water features add a distinctive aesthetic to the project Various swimming pools suitable for all ages Complete health club including gym and spa Designated walking and jogging areas amidst open spaces Safe and recreational areas for children Security and guard services 24-hour security with advanced surveillance systems Underground parking to reduce congestion and maintain aesthetic appeal An integrated residential community combining privacy, luxury, and a high quality of life",
+      "amenities": "Balcony | Built in Wardrobes | Covered Parking | Maids Room | Private Garden | Private Pool | Shared Pool | Study | View of Water | Security | View of Landmark | Walk-in Closet | Shared Gym | Shared Spa | Children's Pool | Lobby in Building",
+      "payment_method": "cash",
+      "agent_id": "58866.0",
+      "agent_name": "pierre osama",
+      "agent_email": "pierre.Osama@spade-consultancy.com",
+      "agent_is_super": "False",
+      "agent_languages": "",
+      "broker_id": "5758.0",
+      "broker_name": "Spade consultancy",
+      "broker_email": "mohmedg.sedik@gmail.com",
+      "broker_phone": "1001436511.0",
+      "contact_phone": "201201801443.0",
+      "contact_whatsapp": "20221257340.0",
+      "contact_email": "pierre.Osama@spade-consultancy.com",
+      "scraped_at": "2026-03-04T14:20:33.281007"
+    },
+    {
+      "listing_id": "K1JC3D6N57ED52N3VX1QQKHHXG",
+      "internal_id": "56247925.0",
+      "category": "buy",
+      "listing_type": "property",
+      "detail_url": "https://www.propertyfinder.eg/en/plp/buy/apartment-for-sale-giza-sheikh-zayed-city-sheikh-zayed-compounds-village-west-2PtYXB31sjw.html",
+      "property_type": "Apartment",
+      "offering_type": "Residential for Sale",
+      "completion_status": "off_plan",
+      "title": "For Sale: Finished Apartment+ ACs in Village West",
+      "price_egp": "5145000.0",
+      "price_period": "sell",
+      "price_currency": "EGP",
+      "location_full": "Village West, Sheikh Zayed Compounds, Sheikh Zayed City, Giza",
+      "city": "Giza",
+      "town": "Sheikh Zayed City",
+      "district": "Sheikh Zayed Compounds",
+      "subdistrict": "Village West",
+      "lat": "30.048093795776367",
+      "lon": "31.02005386352539",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "area_value": "123.0",
+      "area_unit": "sqm",
+      "furnished": "PARTLY",
+      "listing_level": "premium",
+      "is_premium": "True",
+      "is_verified": "False",
+      "is_featured": "False",
+      "is_new_construction": "False",
+      "is_direct_from_dev": "False",
+      "is_exclusive": "False",
+      "listed_date": "2026-03-04T11:24:23Z",
+      "images_count": "10",
+      "has_view_360": "False",
+      "video_url": "",
+      "reference": "rb304",
+      "rera": "",
+      "description": "For Sale: Finished Apartment with ACs in Village West Compound Area: 123 m 2 Bedrooms 2 Bathrooms Reception Terrace Landscape View Prime Location near all main roads 24-hour Security Clubhouse Jogging and Cycling Tracks Barbecue Area Kids Area ______________________ Price: 7,000,000 D.P: 5.145.000 Installments: 1.855.000 ______________________ For more details: 01007169666 Rana Amer",
+      "amenities": "Balcony | Built in Wardrobes | Central A/C | Covered Parking | Shared Pool | Security | Shared Spa | Shared Gym | View of Landmark | Lobby in Building | Children's Pool",
+      "payment_method": "cash",
+      "agent_id": "67166.0",
+      "agent_name": "Rana Bahaa ElDeen",
+      "agent_email": "ranoushamer901@gmail.com",
+      "agent_is_super": "False",
+      "agent_languages": "",
+      "broker_id": "492.0",
+      "broker_name": "Abrag Real Estate",
+      "broker_email": "snawara71@gmail.com",
+      "broker_phone": "201001188088.0",
+      "contact_phone": "201007169666.0",
+      "contact_whatsapp": "20221257340.0",
+      "contact_email": "ranoushamer901@gmail.com",
+      "scraped_at": "2026-03-04T14:20:33.281007"
+    },
+    {
+      "listing_id": "TJWZSKES1XZEQZ01EYX0WEHYN0",
+      "internal_id": "55258951.0",
+      "category": "buy",
+      "listing_type": "property",
+      "detail_url": "https://www.propertyfinder.eg/en/plp/buy/land-for-sale-cairo-new-cairo-city-the-5th-settlement-bait-alwatan-2Pn9vG5j4U4.html",
+      "property_type": "Land",
+      "offering_type": "Residential for Sale",
+      "completion_status": "",
+      "title": "Land for Sale in Fifth Settlement - Beit Al Watan",
+      "price_egp": "23000000.0",
+      "price_period": "sell",
+      "price_currency": "EGP",
+      "location_full": "Bait Alwatan, The 5th Settlement, New Cairo City, Cairo",
+      "city": "Cairo",
+      "town": "New Cairo City",
+      "district": "The 5th Settlement",
+      "subdistrict": "Bait Alwatan",
+      "lat": "30.06067657470703",
+      "lon": "31.55145835876465",
+      "bedrooms": "",
+      "bathrooms": "",
+      "area_value": "765.0",
+      "area_unit": "sqm",
+      "furnished": "",
+      "listing_level": "standard",
+      "is_premium": "False",
+      "is_verified": "False",
+      "is_featured": "False",
+      "is_new_construction": "False",
+      "is_direct_from_dev": "False",
+      "is_exclusive": "False",
+      "listed_date": "2026-02-28T14:54:14Z",
+      "images_count": "10",
+      "has_view_360": "False",
+      "video_url": "",
+      "reference": "TJWZSKES1XZEQZ01EYX0WEHYN0",
+      "rera": "",
+      "description": "code-S3822 Unit Specifications: New Cairo Land for Sale Beit Al Watan – District 1, Plot G197. Land Area: 765 sqm. Location: Situated on a main divider road (Fasel). Status: * Fully Paid (No outstanding payments). License: Authorized for 3 apartments per floor. Construction Status: Built up to the ground floor ceiling. code-S3822 Total Price: EGP 23,000,000 Al Buhairi Group is one of the leading companies in the field of real estate development and marketing. Contact Numbers: 01000372497 01007000516 We also have other properties in: New Cairo Fifth Settlement First Settlement North 90th Street South 90th Street Narcissus Violet Districts South Academy East Academy Jasmine Rehab Gardenia",
+      "amenities": "",
+      "payment_method": "cash",
+      "agent_id": "44226.0",
+      "agent_name": "شركة البحيري جروب البحيري للتطوير والتسويق العقاري El-Behairy Group",
+      "agent_email": "ahmedkasem432@yahoo.com",
+      "agent_is_super": "False",
+      "agent_languages": "English | Arabic",
+      "broker_id": "4963.0",
+      "broker_name": "شركة البحيري جروب",
+      "broker_email": "ahmedkasem432@yahoo.com",
+      "broker_phone": "201149492544.0",
+      "contact_phone": "201000372497.0",
+      "contact_whatsapp": "201000372497.0",
+      "contact_email": "ahmedkasem432@yahoo.com",
+      "scraped_at": "2026-03-04T16:12:46.842828"
+    },
+    {
+      "listing_id": "WQXMKW11YEDP8NMTJ03F7AR91C",
+      "internal_id": "56244698.0",
+      "category": "rent",
+      "listing_type": "property",
+      "detail_url": "https://www.propertyfinder.eg/en/plp/rent/apartment-for-rent-cairo-new-cairo-city-south-investors-area-palm-hills-village-gate-2PtSSR4aWNk.html",
+      "property_type": "Apartment",
+      "offering_type": "Residential for Rent",
+      "completion_status": "",
+      "title": "Semi furnished apartment for rent in Village Gate",
+      "price_egp": "35000.0",
+      "price_period": "monthly",
+      "price_currency": "EGP",
+      "location_full": "Palm Hills Village Gate, South Investors Area, New Cairo City, Cairo",
+      "city": "Cairo",
+      "town": "New Cairo City",
+      "district": "South Investors Area",
+      "subdistrict": "Palm Hills Village Gate",
+      "lat": "30.010927200317383",
+      "lon": "31.49662208557129",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "area_value": "146.0",
+      "area_unit": "sqm",
+      "furnished": "PARTLY",
+      "listing_level": "standard",
+      "is_premium": "False",
+      "is_verified": "False",
+      "is_featured": "False",
+      "is_new_construction": "False",
+      "is_direct_from_dev": "False",
+      "is_exclusive": "False",
+      "listed_date": "2026-03-04T09:59:19Z",
+      "images_count": "14",
+      "has_view_360": "False",
+      "video_url": "",
+      "reference": "G-VG-4-3-26/1",
+      "rera": "",
+      "description": "Village Gate Compound, South Investors Compound: Village Gate Developer: Palm Hills Location: New Cairo, near the American University Unit Type: Apartment with kitchen and air conditioning Area: 146 sqm Delivery Date: Ready to move in Finishing: Semi-furnished Second Floor It consists of: - 2 bedrooms - 2 bathrooms ------------------------------------ Monthly rent: 35,000 01067616304 01117666774 ---------------------------------------- Project Amenities: • Mall under construction • 24/7 security • Privacy • Close to the American University in Cairo, The Spot Mall, Point 90 Mall, restaurants, Starbucks, Fresh Market • All maintenance is available on-site via telephone A location close to the American University in Cairo, Point 90 Mall, cinemas, Starbucks, shisha cafes, and the airport. You'll love the place because of the people, the comfort, the neighborhood, the light, the atmosphere, and the location. It's excellent for couples, solo adventurers, male travelers, and experienced friends (with pets). This unit is located within a compound developed by Palm Hills, offering exceptional security and amenities, including housekeeping, maintenance, a dedicated children's area, and 24-hour security. We are also just steps away from a wide range of shopping options and the American University in Cairo. The Point 90 Cinema is also nearby. The unit is brand new, with fresh towels, linens, and sheets provided with every stay. The compound is easily accessible via Uber and other taxi services and is close to many business hubs in New Cairo. Apartments for rent in South Investors Properties for rent in Village Gate Apartments for rent in Village Gate Penthouses (Roof) for rent in Village Gate Duplexes for rent in Village Gate Studio apartments for rent in Village Gate 1-bedroom apartments for rent in Village Gate 2-bedroom apartments for rent in Village Gate 3-bedroom apartments for rent in Village Gate Furnished studio apartments for rent in Village Gate",
+      "amenities": "Balcony | Built in Wardrobes | Central A/C | Security | Shared Spa | Shared Gym | Kitchen Appliances",
+      "payment_method": "",
+      "agent_id": "33270.0",
+      "agent_name": "Halla Fathy",
+      "agent_email": "goldmark2323@gmail.com",
+      "agent_is_super": "False",
+      "agent_languages": "English | Arabic",
+      "broker_id": "3882.0",
+      "broker_name": "GoldMark RealEstate",
+      "broker_email": "goldmark2323@gmail.com",
+      "broker_phone": "201096693927.0",
+      "contact_phone": "201129655026.0",
+      "contact_whatsapp": "20221257340.0",
+      "contact_email": "goldmark2323@gmail.com",
+      "scraped_at": "2026-03-04T22:22:52.256952"
+    },
+    {
+      "listing_id": "S568KQ9Q8ME7XPBF95PR5WK8KC",
+      "internal_id": "53980800.0",
+      "category": "rent",
+      "listing_type": "property",
+      "detail_url": "https://www.propertyfinder.eg/en/plp/rent/apartment-for-rent-cairo-new-cairo-city-the-5th-settlement-new-lotus-2Pebl5O6pHc.html",
+      "property_type": "Apartment",
+      "offering_type": "Residential for Rent",
+      "completion_status": "",
+      "title": "Unfurnished apartment for rent in New Lotus, Fifth",
+      "price_egp": "25000.0",
+      "price_period": "monthly",
+      "price_currency": "EGP",
+      "location_full": "New Lotus, The 5th Settlement, New Cairo City, Cairo",
+      "city": "Cairo",
+      "town": "New Cairo City",
+      "district": "The 5th Settlement",
+      "subdistrict": "New Lotus",
+      "lat": "30.032323837280277",
+      "lon": "31.52247428894043",
+      "bedrooms": "3",
+      "bathrooms": "3",
+      "area_value": "250.0",
+      "area_unit": "sqm",
+      "furnished": "NO",
+      "listing_level": "standard",
+      "is_premium": "False",
+      "is_verified": "False",
+      "is_featured": "False",
+      "is_new_construction": "False",
+      "is_direct_from_dev": "False",
+      "is_exclusive": "False",
+      "listed_date": "2026-02-23T11:15:18Z",
+      "images_count": "11",
+      "has_view_360": "False",
+      "video_url": "",
+      "reference": "E14597",
+      "rera": "",
+      "description": "E14597 (D) Unfurnished apartment for rent in New Lotus, Fifth Settlement Area: 250 sq m 3 bedrooms, including a master bedroom with ensuite bathroom Living room 3 bathrooms 2-piece reception 2 terraces Super Lux finishing Security cameras Internet and landline First floor Elevator Price: 25,000 Almaz Real Estate Marketing Company We will be your real estate consultant for investing in the New Administrative Capital (additional discounts are offered to our valued clients) and guide you to the best offers. We have apartments and duplexes in all areas of New Cairo, and we also have administrative, medical, residential, and commercial properties in the New Administrative Capital. Almaz Real Estate Marketing Company is always with you to help you choose the best property. Almaz Real Estate Marketing Company We will be your real estate consultant for investing in the New Administrative Capital (additional discounts are offered to our valued clients) and guide you to the best offers. We have apartments and duplexes in all areas of New Cairo, and we also have administrative, medical, residential, and commercial properties in the New Administrative Capital. Almaz Real Estate Marketing Company is always with you to help you choose the best property.",
+      "amenities": "Balcony | Security",
+      "payment_method": "",
+      "agent_id": "44158.0",
+      "agent_name": "منا جمعة ",
+      "agent_email": "nourabdelhalem7@gmail.com",
+      "agent_is_super": "False",
+      "agent_languages": "",
+      "broker_id": "2520.0",
+      "broker_name": "Al Maz Real Estate",
+      "broker_email": "tmamsayed162@gmail.com",
+      "broker_phone": "201016164162.0",
+      "contact_phone": "201066013728.0",
+      "contact_whatsapp": "20221257340.0",
+      "contact_email": "nourabdelhalem7@gmail.com",
+      "scraped_at": "2026-03-04T23:07:39.302591"
+    }
+  ]
+}

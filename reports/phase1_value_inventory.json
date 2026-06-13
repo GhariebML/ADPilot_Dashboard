@@ -1,0 +1,315 @@
+{
+  "counts": {
+    "category": [
+      [
+        "rent",
+        19910
+      ],
+      [
+        "buy",
+        19803
+      ]
+    ],
+    "listing_type": [
+      [
+        "property",
+        39712
+      ],
+      [
+        "project_recommendation",
+        1
+      ]
+    ],
+    "property_type": [
+      [
+        "Apartment",
+        25211
+      ],
+      [
+        "Villa",
+        5652
+      ],
+      [
+        "Townhouse",
+        2187
+      ],
+      [
+        "Chalet",
+        1661
+      ],
+      [
+        "Duplex",
+        1541
+      ],
+      [
+        "Twin House",
+        1426
+      ],
+      [
+        "Penthouse",
+        1240
+      ],
+      [
+        "iVilla",
+        517
+      ],
+      [
+        "Hotel Apartment",
+        107
+      ],
+      [
+        "Roof",
+        57
+      ],
+      [
+        "Whole Building",
+        40
+      ],
+      [
+        "Land",
+        29
+      ],
+      [
+        "Cabin",
+        19
+      ],
+      [
+        "Palace",
+        15
+      ],
+      [
+        "Half Floor",
+        3
+      ],
+      [
+        "Bulk Sale Unit",
+        3
+      ],
+      [
+        "Bungalow",
+        2
+      ],
+      [
+        "<MISSING>",
+        1
+      ],
+      [
+        "Full Floor",
+        1
+      ],
+      [
+        "Bulk Rent Unit",
+        1
+      ]
+    ],
+    "offering_type": [
+      [
+        "Residential for Rent",
+        19910
+      ],
+      [
+        "Residential for Sale",
+        19802
+      ],
+      [
+        "<MISSING>",
+        1
+      ]
+    ],
+    "completion_status": [
+      [
+        "<MISSING>",
+        19950
+      ],
+      [
+        "completed",
+        10135
+      ],
+      [
+        "completed_primary",
+        4304
+      ],
+      [
+        "off_plan_primary",
+        4138
+      ],
+      [
+        "off_plan",
+        1186
+      ]
+    ],
+    "price_period": [
+      [
+        "monthly",
+        19910
+      ],
+      [
+        "sell",
+        19802
+      ],
+      [
+        "<MISSING>",
+        1
+      ]
+    ],
+    "price_currency": [
+      [
+        "EGP",
+        39713
+      ]
+    ],
+    "city": [
+      [
+        "Cairo",
+        25865
+      ],
+      [
+        "Giza",
+        9537
+      ],
+      [
+        "North Coast",
+        1809
+      ],
+      [
+        "Red Sea",
+        1430
+      ],
+      [
+        "Suez",
+        517
+      ],
+      [
+        "Alexandria",
+        468
+      ],
+      [
+        "Qalyubia",
+        44
+      ],
+      [
+        "South Sainai",
+        32
+      ],
+      [
+        "Sharqia",
+        5
+      ],
+      [
+        "Matrouh",
+        3
+      ],
+      [
+        "<MISSING>",
+        1
+      ],
+      [
+        "Al Daqahlya",
+        1
+      ],
+      [
+        "Demyat",
+        1
+      ]
+    ],
+    "area_unit": [
+      [
+        "sqm",
+        39713
+      ]
+    ],
+    "furnished": [
+      [
+        "YES",
+        12719
+      ],
+      [
+        "NO",
+        11033
+      ],
+      [
+        "<MISSING>",
+        8385
+      ],
+      [
+        "PARTLY",
+        7576
+      ]
+    ],
+    "listing_level": [
+      [
+        "standard",
+        31249
+      ],
+      [
+        "premium",
+        4254
+      ],
+      [
+        "featured",
+        4209
+      ],
+      [
+        "<MISSING>",
+        1
+      ]
+    ],
+    "payment_method": [
+      [
+        "<MISSING>",
+        19774
+      ],
+      [
+        "cash",
+        12806
+      ],
+      [
+        "cash | installments",
+        3758
+      ],
+      [
+        "installments",
+        3375
+      ]
+    ]
+  },
+  "numeric_ranges": {
+    "price_egp": {
+      "min": 1300.0,
+      "max": 1000000000.0,
+      "nonmissing": 39712
+    },
+    "lat": {
+      "min": 25.069366455078125,
+      "max": 31.497467041015625,
+      "nonmissing": 39712
+    },
+    "lon": {
+      "min": 25.47613525390625,
+      "max": 34.89657211303711,
+      "nonmissing": 39712
+    },
+    "area_value": {
+      "min": 1.0,
+      "max": 96600.0,
+      "nonmissing": 39712
+    },
+    "images_count": {
+      "min": 0.0,
+      "max": 30.0,
+      "nonmissing": 39713
+    }
+  },
+  "date_ranges": {
+    "listed_date": {
+      "min": "2022-06-08T22:00:31Z",
+      "max": "2026-03-04T23:42:53Z",
+      "nonmissing": 39712
+    },
+    "scraped_at": {
+      "min": "2026-03-04T14:20:33.281007",
+      "max": "2026-03-05T00:43:04.172513",
+      "nonmissing": 39713
+    }
+  }
+}
