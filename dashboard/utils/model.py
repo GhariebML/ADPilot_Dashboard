@@ -101,5 +101,5 @@ def comparable_listings(row: pd.DataFrame, market: pd.DataFrame, n: int = 8) -> 
     dist += .15*(pool["furnished"].astype(str).ne(str(r["furnished"]))).astype(float)
     dist += .15*(pool["payment_method"].astype(str).ne(str(r["payment_method"]))).astype(float)
     pool["similarity_score"]=(1/(1+dist)).clip(0,1)
-    cols=["title","town","district","submarket_or_compound","property_type","area_sqm","bedrooms_num","bathrooms_num","price_egp","price_per_sqm","market_tier","similarity_score","detail_url"]
+    cols=["title","town","district","submarket_or_compound","property_type","area_sqm","bedrooms_num","bathrooms_num","price_egp","price_per_sqm","market_tier","similarity_score","detail_url","lat","lon"]
     return pool.nlargest(n,"similarity_score")[cols]

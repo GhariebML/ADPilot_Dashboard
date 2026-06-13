@@ -44,14 +44,14 @@ def apply_premium_style(fig):
     return fig
 
 
-def price_distribution(df: pd.DataFrame):
+def price_distribution(df: pd.DataFrame, curr: str = "EGP"):
     fig = px.histogram(
         df,
         x="price_egp",
         nbins=55,
         log_y=True,
-        labels={"price_egp": "Asking Price (EGP)"},
-        title="Asking Price Distribution (Log Scale)",
+        labels={"price_egp": f"Asking Price ({curr})"},
+        title=f"Asking Price Distribution ({curr}, Log Scale)",
         color_discrete_sequence=["#6366f1"]
     )
     fig.update_layout(xaxis_tickformat=",")
@@ -59,7 +59,7 @@ def price_distribution(df: pd.DataFrame):
     return apply_premium_style(fig)
 
 
-def ppsqm_box(df: pd.DataFrame):
+def ppsqm_box(df: pd.DataFrame, curr: str = "EGP"):
     top = df["property_type"].value_counts().index
     sample = df[df["property_type"].isin(top)].copy()
     cap = sample["price_per_sqm"].quantile(.99)
@@ -69,8 +69,8 @@ def ppsqm_box(df: pd.DataFrame):
         y="price_per_sqm",
         color="property_type",
         points=False,
-        title="Price per SQM by Property Type",
-        labels={"price_per_sqm": "EGP per SQM", "property_type": "Property Type"},
+        title=f"Price per SQM by Property Type ({curr})",
+        labels={"price_per_sqm": f"{curr} per SQM", "property_type": "Property Type"},
         color_discrete_sequence=["#6366f1", "#14b8a6", "#8b5cf6", "#ec4899", "#f59e0b", "#3b82f6"]
     )
     fig.update_layout(showlegend=False)
@@ -78,7 +78,7 @@ def ppsqm_box(df: pd.DataFrame):
     return apply_premium_style(fig)
 
 
-def location_bar(summary: pd.DataFrame):
+def location_bar(summary: pd.DataFrame, curr: str = "EGP"):
     d = summary[summary["listings"] >= 30].nlargest(15, "median_price_per_sqm").sort_values("median_price_per_sqm")
     fig = px.bar(
         d,
@@ -86,8 +86,8 @@ def location_bar(summary: pd.DataFrame):
         y="town",
         orientation="h",
         hover_data=["listings", "median_price"],
-        title="Highest-Priced Towns (Min 30 Listings)",
-        labels={"median_price_per_sqm": "Median EGP per SQM", "town": "Town"},
+        title=f"Highest-Priced Towns (Min 30 Listings, {curr})",
+        labels={"median_price_per_sqm": f"Median {curr} per SQM", "town": "Town"},
         color="median_price_per_sqm",
         color_continuous_scale=[[0, "#6366f1"], [1, "#14b8a6"]]
     )
@@ -96,7 +96,7 @@ def location_bar(summary: pd.DataFrame):
     return apply_premium_style(fig)
 
 
-def actual_predicted(test: pd.DataFrame):
+def actual_predicted(test: pd.DataFrame, curr: str = "EGP"):
     cap = max(test["price_egp"].quantile(.99), test["predicted_fair_price"].quantile(.99))
     s = test[(test["price_egp"] <= cap) & (test["predicted_fair_price"] <= cap)]
     fig = px.scatter(
@@ -104,8 +104,8 @@ def actual_predicted(test: pd.DataFrame):
         x="price_egp",
         y="predicted_fair_price",
         opacity=0.35,
-        title="Actual vs Predicted Price (Untouched Test Set)",
-        labels={"price_egp": "Actual EGP", "predicted_fair_price": "Predicted EGP"},
+        title=f"Actual vs Predicted Price ({curr}, Untouched Test Set)",
+        labels={"price_egp": f"Actual {curr}", "predicted_fair_price": f"Predicted {curr}"},
         color_discrete_sequence=["#6366f1"]
     )
     fig.update_traces(marker=dict(size=6, line=dict(width=0.5, color="rgba(255,255,255,0.1)")))
