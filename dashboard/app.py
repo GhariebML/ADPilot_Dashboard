@@ -232,7 +232,6 @@ if selected_currency == "USD":
     opp["predicted_fair_price"] = opp["predicted_fair_price"] / 48.0
     opp["lower_fair_price"] = opp["lower_fair_price"] / 48.0
     opp["upper_fair_price"] = opp["upper_fair_price"] / 48.0
-    opp["opportunity_magnitude"] = opp["opportunity_magnitude"] / 48.0
     
     loc["median_price"] = loc["median_price"] / 48.0
     loc["median_price_per_sqm"] = loc["median_price_per_sqm"] / 48.0
@@ -348,8 +347,14 @@ with tabs[1]:
             "market_tier": "Tier",
             "model_confidence": "Confidence"
         }
+        
         st.dataframe(
             filtered[list(display_cols.keys())].rename(columns=display_cols).sort_values(f"Price ({selected_currency})", ascending=False).head(200),
+            column_config={
+                "Area (sqm)": st.column_config.NumberColumn(format="%d sqm"),
+                f"Price ({selected_currency})": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+                f"Price/sqm ({selected_currency})": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d")
+            },
             width="stretch",
             hide_index=True
         )
@@ -433,7 +438,19 @@ with tabs[2]:
         
     loc_display = loc.copy()
     loc_display.columns = [c.replace("_", " ").title() for c in loc_display.columns]
-    st.dataframe(loc_display.head(100), width="stretch", hide_index=True)
+    
+    st.dataframe(
+        loc_display.head(100),
+        column_config={
+            "Median Price": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+            "Mean Price": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+            "Median Price Per Sqm": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+            "Median Area": st.column_config.NumberColumn(format="%d sqm"),
+            "Listings": st.column_config.NumberColumn(format="%d")
+        },
+        width="stretch",
+        hide_index=True
+    )
 
 with tabs[3]:
     st.subheader("How do named submarkets or compounds compare?")
@@ -454,7 +471,20 @@ with tabs[3]:
         
         summary_display = summary.copy()
         summary_display.columns = [c.replace("_", " ").title() for c in summary_display.columns]
-        st.dataframe(summary_display, width="stretch", hide_index=True)
+        
+        st.dataframe(
+            summary_display,
+            column_config={
+                "Listings": st.column_config.NumberColumn(format="%d"),
+                "Median Price": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+                "Median Ppsqm": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+                "Property Types": st.column_config.NumberColumn(format="%d"),
+                "Luxury Share": st.column_config.NumberColumn(format="%.1%"),
+                "Median Fair Price": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d")
+            },
+            width="stretch",
+            hide_index=True
+        )
         
         # Compound Bubble Chart
         fig_bubble = px.scatter(
@@ -538,30 +568,24 @@ with tabs[4]:
         row = build_prediction_row(inputs, meta, market_raw)
         pred = predict_price(row, meta)
         
-        # Suggested Tier (uses raw EGP/sqm internally to compare relative to raw dataset)
+        # Suggested Tier
         tier_name, tier_score = estimate_tier(pred["predicted"] / area, town, ptype, market_raw)
         conf, flags = confidence_label(row, meta, market_raw)
         
-        # Convert predictions to USD if USD is selected
-        if selected_currency == "USD":
-            pred["predicted"] = pred["predicted"] / 48.0
-            pred["lower"] = pred["lower"] / 48.0
-            pred["upper"] = pred["upper"] / 48.0
-            
         # Premium Glowing Card for Estimation Results
         st.html(f"""
         <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(20, 184, 166, 0.12) 100%); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 16px; padding: 28px; margin-bottom: 24px; text-align: center; box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);">
             <div style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: #a5b4fc; margin-bottom: 8px;">Estimated Fair Price</div>
-            <div style="font-size: 2.8rem; font-weight: 800; color: #ffffff; font-family: 'Outfit', sans-serif; text-shadow: 0 0 15px rgba(99, 102, 241, 0.4); margin-bottom: 8px;">{fmt(pred["predicted"] * conversion_factor)}</div>
+            <div style="font-size: 2.8rem; font-weight: 800; color: #ffffff; font-family: 'Outfit', sans-serif; text-shadow: 0 0 15px rgba(99, 102, 241, 0.4); margin-bottom: 8px;">{fmt(pred["predicted"])}</div>
             <div style="font-size: 0.95rem; color: #e2e8f0; margin-bottom: 24px; font-family: 'Inter', sans-serif;">Reliability: <span style="color: {'#10b981' if conf == 'High' else '#f59e0b' if conf == 'Medium' else '#ef4444'}; font-weight: 700;">{conf}</span></div>
             <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 20px;">
                 <div style="padding: 8px 16px;">
                     <div style="font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Empirical Range (90% CI)</div>
-                    <div style="font-size: 1.15rem; font-weight: 600; color: #f3f4f6;">{fmt(pred['lower'] * conversion_factor)} – {fmt(pred['upper'] * conversion_factor)}</div>
+                    <div style="font-size: 1.15rem; font-weight: 600; color: #f3f4f6;">{fmt(pred['lower'])} – {fmt(pred['upper'])}</div>
                 </div>
                 <div style="padding: 8px 16px;">
                     <div style="font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Estimated Price/SQM</div>
-                    <div style="font-size: 1.15rem; font-weight: 600; color: #f3f4f6;">{fmt_sqm((pred['predicted'] * conversion_factor)/area)}</div>
+                    <div style="font-size: 1.15rem; font-weight: 600; color: #f3f4f6;">{fmt_sqm(pred['predicted']/area)}</div>
                 </div>
                 <div style="padding: 8px 16px;">
                     <div style="font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Suggested Tier</div>
@@ -734,7 +758,7 @@ with tabs[4]:
         export_data.append({
             "Type": "Subject Property",
             "Title": f"Valuation for {ptype} in {district}, {town}",
-            "Price": pred["predicted"] * conversion_factor,
+            "Price": pred["predicted"] / conversion_factor,
             "Area (sqm)": area,
             "Bedrooms": beds,
             "Bathrooms": baths,
@@ -748,7 +772,7 @@ with tabs[4]:
             export_data.append({
                 "Type": "Comparable Listing",
                 "Title": r["title"],
-                "Price": r["price_egp"] * conversion_factor,
+                "Price": r["price_egp"],
                 "Area (sqm)": r["area_sqm"],
                 "Bedrooms": r["bedrooms_num"],
                 "Bathrooms": r["bathrooms_num"],
@@ -772,8 +796,27 @@ with tabs[5]:
     st.subheader("How accurate and reliable is the model?")
     comparison = load_table("model_comparison.csv")
     comparison_display = comparison.copy()
-    comparison_display.columns = [c.replace("_", " ").title() for c in comparison_display.columns]
-    st.dataframe(comparison_display, width="stretch", hide_index=True)
+    
+    # Apply currency division to evaluation metrics in model_comparison table
+    if selected_currency == "USD":
+        comparison_display["Validation MAE"] = comparison_display["Validation MAE"] / 48.0
+        comparison_display["Validation RMSE"] = comparison_display["Validation RMSE"] / 48.0
+        comparison_display["Median absolute error"] = comparison_display["Median absolute error"] / 48.0
+        
+    st.dataframe(
+        comparison_display,
+        column_config={
+            "Validation MAE": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+            "Validation RMSE": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+            "Validation R2": st.column_config.NumberColumn(format="%.3f"),
+            "Median absolute error": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+            "Validation MAPE": st.column_config.NumberColumn(format="%.2%"),
+            "Training seconds": st.column_config.NumberColumn(format="%.3f s"),
+            "Prediction seconds": st.column_config.NumberColumn(format="%.4f s")
+        },
+        width="stretch",
+        hide_index=True
+    )
     
     insight("Random Forest had the lowest validation MAE. CatBoost was retained as the deployable model because it produced lower median and percentage error and handles high-cardinality categories natively. This trade-off is documented rather than hidden.")
     test = pd.read_parquet(ROOT / "reports" / "tables" / "test_predictions.parquet")
@@ -860,8 +903,34 @@ with tabs[6]:
     d = d.sort_values("opportunity_magnitude", ascending=False)
     
     opp_display = d.copy()
-    opp_display.columns = [c.replace("_", " ").title() for c in opp_display.columns]
-    st.dataframe(opp_display.head(500), width="stretch", hide_index=True)
+    opp_display = opp_display[["title", "town", "district", "property_type", "area_sqm", "price_egp", "predicted_fair_price", "actual_vs_fair_pct", "opportunity_magnitude", "pricing_status", "model_confidence"]]
+    display_cols = {
+        "title": "Title",
+        "town": "Town",
+        "district": "District",
+        "property_type": "Type",
+        "area_sqm": "Area (sqm)",
+        "price_egp": f"Price ({selected_currency})",
+        "predicted_fair_price": f"Estimated Fair Price ({selected_currency})",
+        "actual_vs_fair_pct": "Difference %",
+        "opportunity_magnitude": "Opportunity Magnitude",
+        "pricing_status": "Status",
+        "model_confidence": "Confidence"
+    }
+    opp_display = opp_display.rename(columns=display_cols)
+    
+    st.dataframe(
+        opp_display.head(500),
+        column_config={
+            "Area (sqm)": st.column_config.NumberColumn(format="%d sqm"),
+            f"Price ({selected_currency})": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+            f"Estimated Fair Price ({selected_currency})": st.column_config.NumberColumn(format="$%d" if selected_currency == "USD" else "EGP %d"),
+            "Difference %": st.column_config.NumberColumn(format="%.1f%%"),
+            "Opportunity Magnitude": st.column_config.NumberColumn(format="%.2f")
+        },
+        width="stretch",
+        hide_index=True
+    )
     st.download_button("Download filtered opportunities", d.to_csv(index=False).encode("utf-8"), "pricing_opportunities.csv", "text/csv")
     st.caption("Large model differences can reflect missing property details, unusual listings, stale advertisements, or genuine pricing opportunities. Manual verification is required.")
 
